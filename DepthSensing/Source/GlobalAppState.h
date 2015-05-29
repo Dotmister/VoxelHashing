@@ -1,4 +1,4 @@
-#pragma once
+
 
 /***************************************************************************/
 /* Global App state: reads and stores all app parameters (except tracking) */
@@ -10,6 +10,9 @@
 // Only works when OpenNI 2 SDK is installed
 //#define OPEN_NI
 
+#include "stdafx.h"
+
+#pragma once
 #include "DX11Utils.h"
 #include "DXUT.h"
 
@@ -19,9 +22,9 @@
 
 #include "DepthSensor.h"
 
-#include "stdafx.h"
 
 #include <string>
+#include <DirectXMath.h>
 
 #define X_GLOBAL_APP_STATE_FIELDS \
 	X(unsigned int, s_sensorIdx) \
@@ -147,19 +150,19 @@ class GlobalAppState
 
 		//! matrices are set by the corresponding sensor
 		float s_intrinsics[9];	
-		//D3DXMATRIX s_intrinsics;
-		//D3DXMATRIX s_intrinsicsInv;
-		D3DXMATRIX s_intrinsicsStereo;
-		D3DXMATRIX s_intrinsicsInvStereo;
+		//DirectX::XMMATRIX s_intrinsics;
+		//DirectX::XMMATRIX s_intrinsicsInv;
+		DirectX::XMMATRIX s_intrinsicsStereo;
+		DirectX::XMMATRIX s_intrinsicsInvStereo;
 
-		D3DXMATRIX s_intrinsicsStereoOther;
-		D3DXMATRIX s_intrinsicsInvStereoOther;
+		DirectX::XMMATRIX s_intrinsicsStereoOther;
+		DirectX::XMMATRIX s_intrinsicsInvStereoOther;
 
-		D3DXMATRIX s_worldToCamStereo;
-		D3DXMATRIX s_camToWorldStereo;
+		DirectX::XMMATRIX s_worldToCamStereo;
+		DirectX::XMMATRIX s_camToWorldStereo;
 
-		D3DXMATRIX s_worldToCamStereoOther;
-		D3DXMATRIX s_camToWorldStereoOther;
+		DirectX::XMMATRIX s_worldToCamStereoOther;
+		DirectX::XMMATRIX s_camToWorldStereoOther;
 
 		Timer		s_Timer;
 
@@ -171,7 +174,7 @@ class GlobalAppState
 
 		void WaitForGPU();
 
-		void StereoCameraFrustum(D3DXMATRIX& proj, D3DXMATRIX& projInv, D3DXMATRIX& worldToCam, D3DXMATRIX& camToWorld, float Convergence, float EyeSeparation, float AspectRatio, float FOV, float n, float f, float width, float height, bool isLeftEye, mat4f& lastRigidTransform);
+		void StereoCameraFrustum(DirectX::XMMATRIX& proj, DirectX::XMMATRIX& projInv, DirectX::XMMATRIX& worldToCam, DirectX::XMMATRIX& camToWorld, float Convergence, float EyeSeparation, float AspectRatio, float FOV, float n, float f, float width, float height, bool isLeftEye, mat4f& lastRigidTransform);
 		
 		void MapConstantBuffer(ID3D11DeviceContext* context);
 
@@ -218,21 +221,21 @@ private:
 		unsigned int g_useGradients;
 		unsigned int g_enableMultiLayerSplatting;
 
-		//D3DXMATRIX g_intrinsics;
-		//D3DXMATRIX g_intrinsicsInv;
-		D3DXMATRIX g_intrinsics;
+		//DirectX::XMMATRIX g_intrinsics;
+		//DirectX::XMMATRIX g_intrinsicsInv;
+		DirectX::XMMATRIX g_intrinsics;
 
-		D3DXMATRIX g_intrinsicsStereo;
-		D3DXMATRIX g_intrinsicsInvStereo;
+		DirectX::XMMATRIX g_intrinsicsStereo;
+		DirectX::XMMATRIX g_intrinsicsInvStereo;
 
-		D3DXMATRIX g_intrinsicsStereoOther;
-		D3DXMATRIX g_intrinsicsInvStereoOther;
+		DirectX::XMMATRIX g_intrinsicsStereoOther;
+		DirectX::XMMATRIX g_intrinsicsInvStereoOther;
 
-		D3DXMATRIX g_worldToCamStereo;
-		D3DXMATRIX g_camToWorldStereo;
+		DirectX::XMMATRIX g_worldToCamStereo;
+		DirectX::XMMATRIX g_camToWorldStereo;
 
-		D3DXMATRIX g_worldToCamStereoOther;
-		D3DXMATRIX g_camToWorldStereoOther;
+		DirectX::XMMATRIX g_worldToCamStereoOther;
+		DirectX::XMMATRIX g_camToWorldStereoOther;
 
 		unsigned int g_stereoEnabled;
 		float g_SensorDepthWorldMin;

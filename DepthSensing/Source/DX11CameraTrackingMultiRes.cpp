@@ -244,7 +244,7 @@ Eigen::Matrix4f DX11CameraTrackingMultiRes::delinearizeTransformation(Vector6f& 
 	return res;
 }
 
-Eigen::Matrix4f DX11CameraTrackingMultiRes::computeBestRigidAlignment(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, ID3D11ShaderResourceView* inputNormalsSRV, D3DXVECTOR3& mean, float meanStDev, float nValidCorres, const Eigen::Matrix4f& globalDeltaTransform, unsigned int level, unsigned int maxInnerIter, float condThres, float angleThres, LinearSystemConfidence& conf)
+Eigen::Matrix4f DX11CameraTrackingMultiRes::computeBestRigidAlignment(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, ID3D11ShaderResourceView* inputNormalsSRV, DirectX::XMFLOAT3& mean, float meanStDev, float nValidCorres, const Eigen::Matrix4f& globalDeltaTransform, unsigned int level, unsigned int maxInnerIter, float condThres, float angleThres, LinearSystemConfidence& conf)
 {
 	Eigen::Matrix4f deltaTransform = globalDeltaTransform;
 
@@ -347,7 +347,7 @@ Eigen::Matrix4f DX11CameraTrackingMultiRes::align(ID3D11DeviceContext* context, 
 	float lastICPError = -1.0f;
 	for(unsigned int i = 0; i<maxOuterIter; i++)
 	{
-		D3DXVECTOR3 mean;
+		DirectX::XMFLOAT3 mean;
 		float meanStDev;
 		float nValidCorres;
 
@@ -389,7 +389,7 @@ Eigen::Matrix4f DX11CameraTrackingMultiRes::align(ID3D11DeviceContext* context, 
 
 HRESULT DX11CameraTrackingMultiRes::computeCorrespondences(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, ID3D11ShaderResourceView* inputNormalsSRV, ID3D11ShaderResourceView* inputColorsSRV, 
 	ID3D11ShaderResourceView* modelSRV, ID3D11ShaderResourceView* modelNormalsSRV, ID3D11ShaderResourceView* modelColorsSRV, 
-	D3DXVECTOR3& mean, float& meanStDev, float& nValidCorres, const Eigen::Matrix4f& deltaTransform, unsigned int level, float distThres, float normalThres)
+	DirectX::XMFLOAT3& mean, float& meanStDev, float& nValidCorres, const Eigen::Matrix4f& deltaTransform, unsigned int level, float distThres, float normalThres)
 {
 	float levelFactor = pow(2.0f, (float)level);
 

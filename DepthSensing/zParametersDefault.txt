@@ -2,7 +2,7 @@
 
 
 // 0 = Kinect, 1 = PrimeSense, 2 = SoftKinect, 3 = BinaryDumpOld, 4 = ImageReader, 5 = KinectOneSensor, 6 = Christoph Sensor, 7 = BinaryDumpReader
-s_sensorIdx = 0;
+s_sensorIdx = 5;
 
 s_ImageReaderSensorSourcePath = "../stanfordData/copyroom_png/";	//just for image reader sensor, where images are loaded
 s_ImageReaderSensorNumFrames = 0;									//dumps the data after n frames (for every reader)

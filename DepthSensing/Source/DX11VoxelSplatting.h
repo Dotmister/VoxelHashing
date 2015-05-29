@@ -482,7 +482,7 @@ class DX11VoxelSplatting
 			float splatSize;
 			unsigned int imageWidth;
 			unsigned int imageHeight;
-			D3DXMATRIX viewMat;
+			DirectX::XMMATRIX viewMat;
 		};
 
 

@@ -7,7 +7,6 @@
 #include "stdafx.h"
 
 #include "Eigen.h"
-#include "d3dx9math.h"
 
 namespace MatrixConversion
 {
@@ -41,7 +40,7 @@ namespace MatrixConversion
 		return vec3f(v[0], v[1], v[2]);
 	}
 
-	static vec3f EigToVec(const D3DXMATRIX v)
+	static vec3f EigToVec(const DirectX::XMMATRIX v)
 	{
 		return vec3f(v[0], v[1], v[2]);
 	}

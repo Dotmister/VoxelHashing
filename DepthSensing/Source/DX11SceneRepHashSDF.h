@@ -16,8 +16,8 @@
 
 
 struct CB_VOXEL_HASH_SDF {
-	D3DXMATRIX		m_RigidTransform;
-	D3DXMATRIX		m_RigidTransformInverse;
+	DirectX::XMMATRIX		m_RigidTransform;
+	DirectX::XMMATRIX		m_RigidTransformInverse;
 	unsigned int	m_HashNumBuckets;
 	unsigned int	m_HashBucketSize;
 	unsigned int	m_InputImageWidth;

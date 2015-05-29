@@ -12,7 +12,7 @@ struct SimpleVertex {
 };
 
 struct CB_QUAD {
-	D3DXMATRIX mWorldViewProjection;
+	DirectX::XMMATRIX mWorldViewProjection;
 	UINT width;
 	UINT height;
 	float2 dummy;

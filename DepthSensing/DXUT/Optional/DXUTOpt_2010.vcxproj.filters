@@ -25,15 +25,8 @@
       <CLInclude Include="SDKmesh.h" />
       <ClCompile Include="SDKmisc.cpp" />
       <CLInclude Include="SDKmisc.h" />
-      <ClCompile Include="SDKsound.cpp" />
-      <CLInclude Include="SDKsound.h" />
-      <ClCompile Include="SDKwavefile.cpp" />
-      <CLInclude Include="SDKwavefile.h" />
   </ItemGroup>
-<ItemGroup>
-</ItemGroup>
-<ItemGroup>
-</ItemGroup>
-<ItemGroup>
-</ItemGroup>
+<ItemGroup></ItemGroup>
+<ItemGroup></ItemGroup>
+<ItemGroup></ItemGroup>
 </Project>

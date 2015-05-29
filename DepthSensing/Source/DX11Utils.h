@@ -23,15 +23,15 @@
 
 
 #ifndef float4
-#define float4 D3DXVECTOR4
+#define float4 DirectX::XMFLOAT4
 #endif
 
 #ifndef float3
-#define float3 D3DXVECTOR3
+#define float3 DirectX::XMFLOAT3
 #endif
 
 #ifndef float2
-#define float2 D3DXVECTOR2
+#define float2 DirectX::XMFLOAT2
 #endif
 
 typedef struct uint4 {

@@ -133,8 +133,8 @@ void InitApp()
 	g_SampleUI.SetCallback( OnGUIEvent ); iY = 10;
 
 
-	D3DXVECTOR3 camPos(0.0f, 0.0f, 0.0f);
-	D3DXVECTOR3 lookAt(0.0, 0.0f, 1.0f);
+	DirectX::XMFLOAT3 camPos(0.0f, 0.0f, 0.0f);
+	DirectX::XMFLOAT3 lookAt(0.0, 0.0f, 1.0f);
 
 	g_Camera.SetProjParams(D3DX_PI/4.0f, 1.3, 0.3, 5.0f);
 	g_Camera.SetViewParams(&camPos, &lookAt);
@@ -834,9 +834,9 @@ void CALLBACK OnD3D11FrameRender( ID3D11Device* pd3dDevice, ID3D11DeviceContext*
 			// Voxel Hashing
 			mat4f trans = g_SceneRepSDFLocal.GetLastRigidTransform();
 			if (GlobalAppState::getInstance().s_RenderMode == RENDERMODE_VIEW) {
-				D3DXMATRIX view = *g_Camera.GetViewMatrix();
-				D3DXMatrixInverse(&view, NULL, &view);
-				D3DXMatrixTranspose(&view, &view);
+				DirectX::XMMATRIX view = g_Camera.GetViewMatrix();
+				view = XMMatrixInverse(NULL, view);
+				view = XMMatrixTranspose(view);
 				trans = trans * *(mat4f*)&view;
 
 				vec4f posWorld = trans*GlobalAppState::getInstance().s_StreamingPos; // trans laggs one frame *trans
@@ -1083,7 +1083,7 @@ void CALLBACK OnD3D11FrameRender( ID3D11Device* pd3dDevice, ID3D11DeviceContext*
 			// Uniform Voxel Grid
 			/*mat4f trans = DX11VoxelGridOperations::GetLastRigidTransform();
 			if (GlobalAppState::getInstance().s_RenderMode == RENDERMODE_VIEW) {
-				D3DXMATRIX view = *g_Camera.GetViewMatrix();
+				DirectX::XMMATRIX view = *g_Camera.GetViewMatrix();
 				D3DXMatrixInverse(&view, NULL, &view);
 				D3DXMatrixTranspose(&view, &view);
 				trans = *(mat4f*)&view;

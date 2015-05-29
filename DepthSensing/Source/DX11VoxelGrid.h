@@ -32,7 +32,7 @@ class DX11VoxelGrid
 			return m_voxelGridUAV;
 		}
 
-		static D3DXVECTOR3* getPosition()
+		static DirectX::XMFLOAT3* getPosition()
 		{
 			return &m_position;
 		}
@@ -42,7 +42,7 @@ class DX11VoxelGrid
 			return &m_gridDimensions;
 		}
 
-		static D3DXVECTOR3* getVoxelExtends()
+		static DirectX::XMFLOAT3* getVoxelExtends()
 		{
 			return &m_voxelExtends;
 		}
@@ -89,8 +89,8 @@ class DX11VoxelGrid
 			SAFE_RELEASE(m_voxelGridUAV);
 		}
 
-		static D3DXVECTOR3 m_position; // position of voxel grid
-		static D3DXVECTOR3 m_voxelExtends;  // length of voxel in meters
+		static DirectX::XMFLOAT3 m_position; // position of voxel grid
+		static DirectX::XMFLOAT3 m_voxelExtends;  // length of voxel in meters
 		static int3 m_gridDimensions; // number of voxels in each dimension
 		
 		static ID3D11Buffer* m_voxelGrid;

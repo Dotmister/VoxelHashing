@@ -107,11 +107,11 @@ HRESULT DX11NormalizeReduction::OnD3D11CreateDevice( ID3D11Device* pd3dDevice )
 	return hr;
 }
 
-HRESULT DX11NormalizeReduction::applyNorm( ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, unsigned int level, unsigned int imageWidth, unsigned int imageHeight, D3DXVECTOR3& mean, float& meanStDev, float& nValidCorres )
+HRESULT DX11NormalizeReduction::applyNorm( ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, unsigned int level, unsigned int imageWidth, unsigned int imageHeight, DirectX::XMFLOAT3& mean, float& meanStDev, float& nValidCorres )
 {
 	HRESULT hr = S_OK;
 
-	mean = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+	mean = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 	meanStDev = 1.0f;
 
 	return hr;
@@ -152,7 +152,7 @@ HRESULT DX11NormalizeReduction::applyNorm( ID3D11DeviceContext* context, ID3D11S
 	return hr;
 }
 
-void DX11NormalizeReduction::reductionCPU( const float* data, unsigned int nElems, D3DXVECTOR3& mean, float& meanStDev, float& nValidCorres )
+void DX11NormalizeReduction::reductionCPU( const float* data, unsigned int nElems, DirectX::XMFLOAT3& mean, float& meanStDev, float& nValidCorres )
 {
 	float buffer[8] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 	for(unsigned int k = 0; k<nElems; k++)
@@ -167,14 +167,14 @@ void DX11NormalizeReduction::reductionCPU( const float* data, unsigned int nElem
 
 	if(nValidCorres >= 10.0f)
 	{
-		mean = D3DXVECTOR3(buffer[0]/nValidCorres, buffer[1]/nValidCorres, buffer[2]/nValidCorres);
-		D3DXVECTOR3 meanSquared = D3DXVECTOR3(buffer[3]/nValidCorres, buffer[4]/nValidCorres, buffer[5]/nValidCorres);
-		D3DXVECTOR3 var = D3DXVECTOR3(meanSquared.x-mean.x*mean.x, meanSquared.y-mean.y*mean.y, meanSquared.z-mean.z*mean.z);
+		mean = DirectX::XMFLOAT3(buffer[0]/nValidCorres, buffer[1]/nValidCorres, buffer[2]/nValidCorres);
+		DirectX::XMFLOAT3 meanSquared = DirectX::XMFLOAT3(buffer[3]/nValidCorres, buffer[4]/nValidCorres, buffer[5]/nValidCorres);
+		DirectX::XMFLOAT3 var = DirectX::XMFLOAT3(meanSquared.x-mean.x*mean.x, meanSquared.y-mean.y*mean.y, meanSquared.z-mean.z*mean.z);
 		meanStDev = (sqrt(var.x)+sqrt(var.y)+sqrt(var.z))/3.0f;
 	}
 	else
 	{
-		mean = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		mean = DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f);
 		meanStDev = 1.0f;
 	}
 }

@@ -19,7 +19,7 @@ class DX11BuildLinearSystem
 
 		static HRESULT OnD3D11CreateDevice(ID3D11Device* pd3dDevice);
 		
-		static HRESULT applyBL(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, ID3D11ShaderResourceView* correspondenceSRV, ID3D11ShaderResourceView* correspondenceNormalsSRV, D3DXVECTOR3& mean, float meanStDev, Eigen::Matrix4f& deltaTransform, unsigned int imageWidth, unsigned int imageHeight, unsigned int level, Matrix6x7f& res, LinearSystemConfidence& conf);
+		static HRESULT applyBL(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, ID3D11ShaderResourceView* correspondenceSRV, ID3D11ShaderResourceView* correspondenceNormalsSRV, DirectX::XMFLOAT3& mean, float meanStDev, Eigen::Matrix4f& deltaTransform, unsigned int imageWidth, unsigned int imageHeight, unsigned int level, Matrix6x7f& res, LinearSystemConfidence& conf);
 
 		//! builds AtA, AtB, and confidences
 		static Matrix6x7f reductionSystemCPU(const float* data, unsigned int nElems, LinearSystemConfidence& conf);
@@ -39,7 +39,7 @@ class DX11BuildLinearSystem
 			int imageHeigth;
 			int2 dummy;
 			float deltaTransform[16];
-			D3DXVECTOR3 mean;
+			DirectX::XMFLOAT3 mean;
 			float meanStDevInv;
 		};
 		

@@ -12,15 +12,18 @@
       <CLInclude Include="DXUT.h" />
       <ClCompile Include="DXUTDevice11.cpp" />
       <CLInclude Include="DXUTDevice11.h" />
-      <ClCompile Include="DXUTDevice9.cpp" />
-      <CLInclude Include="DXUTDevice9.h" />
       <ClCompile Include="DXUTmisc.cpp" />
       <CLInclude Include="DXUTmisc.h" />
+      <CLInclude Include="DXErr.h" />
+      <ClCompile Include="DXErr.cpp" />
+      <CLInclude Include="DDSTextureLoader.h" />
+      <ClCompile Include="DDSTextureLoader.cpp" />
+      <CLInclude Include="Screengrab.h" />
+      <ClCompile Include="Screengrab.cpp" />
+      <CLInclude Include="WICTextureLoader.h" />
+      <ClCompile Include="WICTextureLoader.cpp" />
   </ItemGroup>
-<ItemGroup>
-</ItemGroup>
-<ItemGroup>
-</ItemGroup>
-<ItemGroup>
-</ItemGroup>
+<ItemGroup></ItemGroup>
+<ItemGroup></ItemGroup>
+<ItemGroup></ItemGroup>
 </Project>

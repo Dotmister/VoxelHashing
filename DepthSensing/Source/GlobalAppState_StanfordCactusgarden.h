@@ -95,22 +95,22 @@ bool GlobalAppState::s_stereoEnabled = false;
 unsigned int GlobalAppState::s_windowWidthStereo = 1920;
 unsigned int GlobalAppState::s_windowHeightStereo = 1080;
 
-D3DXMATRIX GlobalAppState::s_intrinsics; // Automatic Initialization
-D3DXMATRIX GlobalAppState::s_intrinsicsInv; // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsics; // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsicsInv; // Automatic Initialization
 
 
 // Stereo
 
-D3DXMATRIX GlobalAppState::s_intrinsicsStereo; // Automatic Initialization
-D3DXMATRIX GlobalAppState::s_intrinsicsInvStereo; // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsicsStereo; // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsicsInvStereo; // Automatic Initialization
 
-D3DXMATRIX GlobalAppState::s_intrinsicsStereoOther;  // Automatic Initialization
-D3DXMATRIX GlobalAppState::s_intrinsicsInvStereoOther;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsicsStereoOther;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_intrinsicsInvStereoOther;  // Automatic Initialization
 
-D3DXMATRIX GlobalAppState::s_worldToCamStereo;  // Automatic Initialization
-D3DXMATRIX GlobalAppState::s_camToWorldStereo;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_worldToCamStereo;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_camToWorldStereo;  // Automatic Initialization
 
-D3DXMATRIX GlobalAppState::s_worldToCamStereoOther;  // Automatic Initialization
-D3DXMATRIX GlobalAppState::s_camToWorldStereoOther;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_worldToCamStereoOther;  // Automatic Initialization
+DirectX::XMMATRIX GlobalAppState::s_camToWorldStereoOther;  // Automatic Initialization
 
 bool GlobalAppState::s_currentlyInStereoMode = false; // Default state

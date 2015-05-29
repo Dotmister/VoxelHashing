@@ -17,9 +17,9 @@ class DX11NormalizeReduction
 
 		static HRESULT OnD3D11CreateDevice(ID3D11Device* pd3dDevice);
 		
-		static HRESULT applyNorm(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, unsigned int level, unsigned int imageWidth, unsigned int imageHeight, D3DXVECTOR3& mean, float& meanStDev, float& nValidCorres);
+		static HRESULT applyNorm(ID3D11DeviceContext* context, ID3D11ShaderResourceView* inputSRV, unsigned int level, unsigned int imageWidth, unsigned int imageHeight, DirectX::XMFLOAT3& mean, float& meanStDev, float& nValidCorres);
 
-		static void reductionCPU(const float* data, unsigned int nElems, D3DXVECTOR3& mean, float& meanStDev, float& nValidCorres);
+		static void reductionCPU(const float* data, unsigned int nElems, DirectX::XMFLOAT3& mean, float& meanStDev, float& nValidCorres);
 				
 		static void OnD3D11DestroyDevice();
 

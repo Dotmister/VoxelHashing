@@ -469,7 +469,7 @@ void DX11SceneRepHashSDF::MapConstantBuffer( ID3D11DeviceContext* context )
 	CB_VOXEL_HASH_SDF* cbuffer = (CB_VOXEL_HASH_SDF*)mappedResource.pData;
 	memcpy(cbuffer->m_RigidTransform, &m_LastRigidTransform, sizeof(mat4f)); 
 	//D3DXMatrixInverse(&cbuffer->m_RigidTransformInverse, NULL, &cbuffer->m_RigidTransform);
-	D3DXMatrixInverse(&cbuffer->m_RigidTransformInverse, NULL, (D3DXMATRIX*)&m_LastRigidTransform);
+	cbuffer->m_RigidTransformInverse = XMMatrixInverse(NULL, *(DirectX::XMMATRIX*)&m_LastRigidTransform); // ERROR
 	cbuffer->m_HashNumBuckets = m_HashNumBuckets;
 	cbuffer->m_HashBucketSize = m_HashBucketSize;
 	cbuffer->m_InputImageWidth = GlobalAppState::getInstance().s_windowWidth;

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 
+#include <DirectXMath.h>
 #include "GlobalAppState.h"
 
 #include "ImageReaderSensor.h"
@@ -50,8 +51,8 @@ HRESULT GlobalAppState::OnD3D11CreateDevice( ID3D11Device* pd3dDevice )
 	if(FAILED(hr)) return hr;
 
 	memcpy(s_intrinsics, getDepthSensor()->getIntrinsics().coeff, sizeof(float)*9);
-	//s_intrinsics = *(D3DXMATRIX*)&getDepthSensor()->getIntrinsics();
-	//s_intrinsicsInv = *(D3DXMATRIX*)&getDepthSensor()->getIntrinsicsInv();
+	//s_intrinsics = *(DirectX::XMMATRIX*)&getDepthSensor()->getIntrinsics();
+	//s_intrinsicsInv = *(DirectX::XMMATRIX*)&getDepthSensor()->getIntrinsicsInv();
 
 	return  hr;
 }
@@ -71,7 +72,7 @@ void GlobalAppState::WaitForGPU()
 	while (S_OK != DXUTGetD3D11DeviceContext()->GetData(s_pQuery, NULL, 0, 0));
 }
 
-void GlobalAppState::StereoCameraFrustum( D3DXMATRIX& proj, D3DXMATRIX& projInv, D3DXMATRIX& worldToCam, D3DXMATRIX& camToWorld, float Convergence, float EyeSeparation, float AspectRatio, float FOV, float n, float f, float width, float height, bool isLeftEye, mat4f& lastRigidTransform )
+void GlobalAppState::StereoCameraFrustum( DirectX::XMMATRIX& proj, DirectX::XMMATRIX& projInv, DirectX::XMMATRIX& worldToCam, DirectX::XMMATRIX& camToWorld, float Convergence, float EyeSeparation, float AspectRatio, float FOV, float n, float f, float width, float height, bool isLeftEye, mat4f& lastRigidTransform )
 {
 	float PI = 3.14159265359f;
 	FOV = FOV * PI / 180.0f;
@@ -103,13 +104,13 @@ void GlobalAppState::StereoCameraFrustum( D3DXMATRIX& proj, D3DXMATRIX& projInv,
 	float centerY = (height/2.0f)*(t+b)/(t-b)+(height/2.0f);
 	//float centerY = (height/2.0f);
 
-	proj = D3DXMATRIX(fovX, 0.0f, 0.0f, centerX,
+	proj = DirectX::XMMATRIX(fovX, 0.0f, 0.0f, centerX,
 		0.0f, fovY, 0.0f, centerY,
 		0.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);
 
 
-	projInv = D3DXMATRIX(1.0f/fovX, 0.0f, 0.0f, -centerX*1.0f/fovX,
+	projInv = DirectX::XMMATRIX(1.0f/fovX, 0.0f, 0.0f, -centerX*1.0f/fovX,
 		0.0f, 1.0f/fovY, 0.0f, -centerY*1.0f/fovY,
 		0.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f);
@@ -164,19 +165,19 @@ void GlobalAppState::MapConstantBuffer( ID3D11DeviceContext* context )
 	cbuffer->g_enableMultiLayerSplatting = s_enableMultiLayerSplatting ? 1 : 0;
 
 	memcpy(&cbuffer->g_intrinsics, &s_intrinsics, sizeof(float)*9);
-	//memcpy(&cbuffer->g_intrinsicsInv, &s_intrinsicsInv, sizeof(D3DXMATRIX));
+	//memcpy(&cbuffer->g_intrinsicsInv, &s_intrinsicsInv, sizeof(DirectX::XMMATRIX));
 
-	memcpy(&cbuffer->g_intrinsicsStereo, &s_intrinsicsStereo, sizeof(D3DXMATRIX));
-	memcpy(&cbuffer->g_intrinsicsInvStereo, &s_intrinsicsInvStereo, sizeof(D3DXMATRIX));
+	memcpy(&cbuffer->g_intrinsicsStereo, &s_intrinsicsStereo, sizeof(DirectX::XMMATRIX));
+	memcpy(&cbuffer->g_intrinsicsInvStereo, &s_intrinsicsInvStereo, sizeof(DirectX::XMMATRIX));
 
-	memcpy(&cbuffer->g_intrinsicsStereoOther, &s_intrinsicsStereoOther, sizeof(D3DXMATRIX));
-	memcpy(&cbuffer->g_intrinsicsInvStereoOther, &s_intrinsicsInvStereoOther, sizeof(D3DXMATRIX));
+	memcpy(&cbuffer->g_intrinsicsStereoOther, &s_intrinsicsStereoOther, sizeof(DirectX::XMMATRIX));
+	memcpy(&cbuffer->g_intrinsicsInvStereoOther, &s_intrinsicsInvStereoOther, sizeof(DirectX::XMMATRIX));
 
-	memcpy(&cbuffer->g_worldToCamStereo, &s_worldToCamStereo, sizeof(D3DXMATRIX));
-	memcpy(&cbuffer->g_camToWorldStereo, &s_camToWorldStereo, sizeof(D3DXMATRIX));
+	memcpy(&cbuffer->g_worldToCamStereo, &s_worldToCamStereo, sizeof(DirectX::XMMATRIX));
+	memcpy(&cbuffer->g_camToWorldStereo, &s_camToWorldStereo, sizeof(DirectX::XMMATRIX));
 
-	memcpy(&cbuffer->g_worldToCamStereoOther, &s_worldToCamStereoOther, sizeof(D3DXMATRIX));
-	memcpy(&cbuffer->g_camToWorldStereoOther, &s_camToWorldStereoOther, sizeof(D3DXMATRIX));
+	memcpy(&cbuffer->g_worldToCamStereoOther, &s_worldToCamStereoOther, sizeof(DirectX::XMMATRIX));
+	memcpy(&cbuffer->g_camToWorldStereoOther, &s_camToWorldStereoOther, sizeof(DirectX::XMMATRIX));
 
 	cbuffer->g_stereoEnabled = s_currentlyInStereoMode ? 1 : 0;
 	cbuffer->g_SensorDepthWorldMin = s_SensorDepthWorldMin;

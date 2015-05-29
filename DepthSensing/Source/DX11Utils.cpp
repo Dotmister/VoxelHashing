@@ -404,7 +404,7 @@ void LoadCamera( CModelViewerCamera &camera, const char* filename )
 	std::ifstream file;
 	file.open(filename);
 	if (file.is_open() && file.good()) {
-		D3DXVECTOR3 eye, lookAt;
+		DirectX::XMFLOAT3 eye, lookAt;
 		D3DXQUATERNION world, view;
 
 		file >> eye.x >> eye.y >> eye.z;

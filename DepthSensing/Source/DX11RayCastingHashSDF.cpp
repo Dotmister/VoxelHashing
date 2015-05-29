@@ -1,5 +1,7 @@
 #include "stdafx.h"
 
+#include "ScreenGrab.h"
+
 #include "DX11RayCastingHashSDF.h"
 
 #include "GlobalAppState.h"
@@ -174,7 +176,7 @@ HRESULT DX11RayCastingHashSDF::RenderStereo( ID3D11DeviceContext* context, ID3D1
 			for (unsigned int i = 0; i < numZeros; i++) j += swprintf_s(sz + j, 200 - j, L"0");
 			swprintf_s(sz + j, 200 - j, L"%d.bmp", whichShot);
 
-			V_RETURN(D3DX11SaveTextureToFile(context, DX11PhongLighting::getStereoImage(), D3DX11_IFF_BMP, sz));
+			V_RETURN(DirectX::SaveWICTextureToFile(context, DX11PhongLighting::getStereoImage(), D3DX11_IFF_BMP, sz));
 		}
 
 		{
@@ -205,7 +207,7 @@ HRESULT DX11RayCastingHashSDF::RenderStereo( ID3D11DeviceContext* context, ID3D1
 			for (unsigned int i = 0; i < numZeros; i++) j += swprintf_s(sz + j, 200 - j, L"0");
 			swprintf_s(sz + j, 200 - j, L"%d.bmp", whichShot);
 
-			V_RETURN(D3DX11SaveTextureToFile(context, DX11PhongLighting::getStereoImage(), D3DX11_IFF_BMP, sz));
+			V_RETURN(DirectX::SaveWICTextureToFile(context, DX11PhongLighting::getStereoImage(), D3DX11_IFF_BMP, sz));
 		}
 
 		whichShot++;

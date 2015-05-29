@@ -20,7 +20,7 @@ struct CB_VOXEL_HASH {
 	float			m_VirtualVoxelSize;
 	unsigned int	m_OtherNumVoxels;
 	float			m_dummy;
-	D3DXMATRIX		m_RigidTransform;
+	DirectX::XMMATRIX		m_RigidTransform;
 	float4			m_CameraPos;
 };
 

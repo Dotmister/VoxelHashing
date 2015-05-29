@@ -4,7 +4,6 @@
 
 // This file requires the installation of the DirectX SDK, a link for which is included in the Toolkit Browser
 #include <d3d11.h>
-#include <xnamath.h>
 
 #include "DX11Utils.h"
 

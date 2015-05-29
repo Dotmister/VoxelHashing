@@ -28,7 +28,7 @@ class DX11RayCasting
 			destroy();
 		}
 
-		static HRESULT render(ID3D11DeviceContext* context, ID3D11ShaderResourceView* voxelBuffer, D3DXVECTOR3* gridPosition, int3* gridDimensions, D3DXVECTOR3* voxelExtends, const mat4f* lastRigidTransform, unsigned int imageWidth, unsigned int imageHeight) 
+		static HRESULT render(ID3D11DeviceContext* context, ID3D11ShaderResourceView* voxelBuffer, DirectX::XMFLOAT3* gridPosition, int3* gridDimensions, DirectX::XMFLOAT3* voxelExtends, const mat4f* lastRigidTransform, unsigned int imageWidth, unsigned int imageHeight) 
 		{
 			HRESULT hr = S_OK;
 
@@ -42,8 +42,8 @@ class DX11RayCasting
 				mat4f worldToLastKinectSpace = lastRigidTransform->getInverse();
 				memcpy(&cbuffer->rigidTransform, lastRigidTransform, sizeof(mat4f));
 				memcpy(&cbuffer->viewMat, &worldToLastKinectSpace, sizeof(mat4f));
-				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(D3DXVECTOR3));
-				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(DirectX::XMFLOAT3));
+				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(DirectX::XMFLOAT3));
 				memcpy(&cbuffer->gridDimensions, gridDimensions, sizeof(int3));
 				
 			context->Unmap(m_constantBuffer, 0);
@@ -266,7 +266,7 @@ class DX11RayCasting
 			int3 gridDimensions;
 			int align3;
 
-			D3DXVECTOR3 voxelExtends;
+			DirectX::XMFLOAT3 voxelExtends;
 			float align4;
 		};
 										

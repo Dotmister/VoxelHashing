@@ -41,7 +41,7 @@ class DX11VoxelGridOperations
 
 	public:
 		
-		static HRESULT reset(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, D3DXVECTOR3* gridPosition, int3* gridDimensions, D3DXVECTOR3* voxelExtends) 
+		static HRESULT reset(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, DirectX::XMFLOAT3* gridPosition, int3* gridDimensions, DirectX::XMFLOAT3* voxelExtends) 
 		{
 			m_LastRigidTransform.setIdentity();
 			m_NumIntegratedImages = 0;
@@ -53,8 +53,8 @@ class DX11VoxelGridOperations
 			V_RETURN(context->Map(m_constantBufferReset, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
 				CBufferReset *cbuffer = (CBufferReset*)mappedResource.pData;
-				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(D3DXVECTOR3));
-				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(DirectX::XMFLOAT3));
+				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(DirectX::XMFLOAT3));
 				memcpy(&cbuffer->gridDimensions, gridDimensions, sizeof(int3));
 
 			context->Unmap(m_constantBufferReset, 0);
@@ -124,13 +124,13 @@ class DX11VoxelGridOperations
 		struct CBufferReset
 		{
 			// Grid
-			D3DXVECTOR3 gridPosition;
+			DirectX::XMFLOAT3 gridPosition;
 			float align0;
 
 			int3 gridDimensions;
 			int align1;
 
-			D3DXVECTOR3 voxelExtends;
+			DirectX::XMFLOAT3 voxelExtends;
 			float align2;
 		};
 				
@@ -145,7 +145,7 @@ class DX11VoxelGridOperations
 
 	public:
 		
-		static HRESULT setDistanceFunctionEllipsoid(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, D3DXVECTOR3* gridPosition, int3* gridDimensions, D3DXVECTOR3* voxelExtends, D3DXVECTOR3& center, float a, float b, float c) 
+		static HRESULT setDistanceFunctionEllipsoid(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, DirectX::XMFLOAT3* gridPosition, int3* gridDimensions, DirectX::XMFLOAT3* voxelExtends, DirectX::XMFLOAT3& center, float a, float b, float c) 
 		{
 			HRESULT hr = S_OK;
 
@@ -154,10 +154,10 @@ class DX11VoxelGridOperations
 			V_RETURN(context->Map(m_constantBufferSetDistanceFunctionEllipsoid, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
 				CBufferSetDistanceFunctionEllipsoid *cbuffer = (CBufferSetDistanceFunctionEllipsoid*)mappedResource.pData;
-				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(D3DXVECTOR3));
-				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(DirectX::XMFLOAT3));
+				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(DirectX::XMFLOAT3));
 				memcpy(&cbuffer->gridDimensions, gridDimensions, sizeof(int3));
-				memcpy(&cbuffer->center, &center, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->center, &center, sizeof(DirectX::XMFLOAT3));
 				cbuffer->a = a;
 				cbuffer->b = b;
 				cbuffer->c = c;
@@ -244,17 +244,17 @@ class DX11VoxelGridOperations
 		struct CBufferSetDistanceFunctionEllipsoid
 		{
 			// Grid
-			D3DXVECTOR3 gridPosition;
+			DirectX::XMFLOAT3 gridPosition;
 			float align0;
 
 			int3 gridDimensions;
 			int align1;
 
-			D3DXVECTOR3 voxelExtends;
+			DirectX::XMFLOAT3 voxelExtends;
 			float align2;
 
 			// Sphere
-			D3DXVECTOR3 center;
+			DirectX::XMFLOAT3 center;
 			float align3;
 
 			float a;
@@ -274,7 +274,7 @@ class DX11VoxelGridOperations
 
 	public:
 		
-		static HRESULT integrateDepthFrame(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, D3DXVECTOR3* gridPosition, int3* gridDimensions, D3DXVECTOR3* voxelExtends, ID3D11ShaderResourceView* depth, ID3D11ShaderResourceView* color, mat4f* lastRigidTransform, unsigned int imageWidth, unsigned int imageHeight)
+		static HRESULT integrateDepthFrame(ID3D11DeviceContext* context, ID3D11UnorderedAccessView* voxelBuffer, DirectX::XMFLOAT3* gridPosition, int3* gridDimensions, DirectX::XMFLOAT3* voxelExtends, ID3D11ShaderResourceView* depth, ID3D11ShaderResourceView* color, mat4f* lastRigidTransform, unsigned int imageWidth, unsigned int imageHeight)
 		{
 			HRESULT hr = S_OK;
 
@@ -286,8 +286,8 @@ class DX11VoxelGridOperations
 			V_RETURN(context->Map(m_constantBufferIntegrateDepthFrame, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
 				CBufferIntegrateDepthFrame *cbuffer = (CBufferIntegrateDepthFrame*)mappedResource.pData;
-				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(D3DXVECTOR3));
-				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(DirectX::XMFLOAT3));
+				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(DirectX::XMFLOAT3));
 				memcpy(&cbuffer->gridDimensions, gridDimensions, sizeof(int3));
 
 				mat4f worldToLastKinectSpace = lastRigidTransform->getInverse();
@@ -395,13 +395,13 @@ class DX11VoxelGridOperations
 		struct CBufferIntegrateDepthFrame
 		{
 			// Grid
-			D3DXVECTOR3 gridPosition;
+			DirectX::XMFLOAT3 gridPosition;
 			float align0;
 
 			int3 gridDimensions;
 			int align1;
 
-			D3DXVECTOR3 voxelExtends;
+			DirectX::XMFLOAT3 voxelExtends;
 			float align2;
 
 			int imageWidth;
@@ -426,7 +426,7 @@ class DX11VoxelGridOperations
 
 	public:
 		
-		static HRESULT extractIsoSurface(ID3D11DeviceContext* context, ID3D11ShaderResourceView* voxelBuffer, D3DXVECTOR3* gridPosition, int3* gridDimensions, D3DXVECTOR3* voxelExtends)
+		static HRESULT extractIsoSurface(ID3D11DeviceContext* context, ID3D11ShaderResourceView* voxelBuffer, DirectX::XMFLOAT3* gridPosition, int3* gridDimensions, DirectX::XMFLOAT3* voxelExtends)
 		{
 			HRESULT hr = S_OK;
 
@@ -435,8 +435,8 @@ class DX11VoxelGridOperations
 			V_RETURN(context->Map(m_constantBufferExtractIsoSurface, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
 				CBufferExtractIsoSurface *cbuffer = (CBufferExtractIsoSurface*)mappedResource.pData;
-				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(D3DXVECTOR3));
-				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(D3DXVECTOR3));
+				memcpy(&cbuffer->gridPosition, gridPosition, sizeof(DirectX::XMFLOAT3));
+				memcpy(&cbuffer->voxelExtends, voxelExtends, sizeof(DirectX::XMFLOAT3));
 				memcpy(&cbuffer->gridDimensions, gridDimensions, sizeof(int3));
 			
 			context->Unmap(m_constantBufferExtractIsoSurface, 0);
@@ -605,13 +605,13 @@ class DX11VoxelGridOperations
 		struct CBufferExtractIsoSurface
 		{
 			// Grid
-			D3DXVECTOR3 gridPosition;
+			DirectX::XMFLOAT3 gridPosition;
 			float align0;
 
 			int3 gridDimensions;
 			int align1;
 
-			D3DXVECTOR3 voxelExtends;
+			DirectX::XMFLOAT3 voxelExtends;
 			float align2;
 		};
 

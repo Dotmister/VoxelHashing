@@ -887,7 +887,7 @@ class DX11SceneRepChunkGrid
 			unsigned int start;
 			unsigned int aling1;
 
-			D3DXVECTOR3 cameraPosition;
+			DirectX::XMFLOAT3 cameraPosition;
 			unsigned int aling2;
 		};
 
