@@ -1,6 +1,7 @@
-
+#pragma once
 #include "stdafx.h"
 
+#ifndef KINECT_ONE
 #include "KinectSensor.h"
 
 KinectSensor::KinectSensor()
@@ -339,3 +340,4 @@ HRESULT KinectSensor::toggleAutoWhiteBalance()
 
 	return hr;
 }
+#endif

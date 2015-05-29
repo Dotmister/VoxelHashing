@@ -9,6 +9,8 @@
 //Only working with Kinect 2.0 SDK (which wants to run on Win8)
 #ifdef KINECT_ONE
 
+#define M_PI 3.14159265358979323846
+
 #include <Kinect.h>
 #include "DepthSensor.h"
 
@@ -33,7 +35,7 @@ public:
 		m_pKinectSensor = NULL;
 
 		HRESULT hr = createFirstConnected();
-		if (hr != S_OK)	throw EXCEPTION("failed to initialize kinect");
+		if (hr != S_OK)	throw std::exception("failed to initialize kinect");
 
 		// create heap storage for color pixel data in RGBX format
 		m_pColorRGBX = new RGBQUAD[cColorWidth * cColorHeight];
@@ -141,11 +143,11 @@ public:
 				float focalLengthX = centerX/tan(fovX/2.0f*(float)M_PI/180.0f);
 				float focalLengthY = centerY/tan(fovY/2.0f*(float)M_PI/180.0f);
 
-				double k1 = 1.5355725262415776e-001;
-				double k2 = -3.3172043290283648e-001;
-				double p1 = -8.6523355025079577e-003;
-				double p2 = 1.3118055542282476e-002;
-				double k3 = 1.5561334862418680e-001;
+				float k1 = 1.5355725262415776e-001;
+				float k2 = -3.3172043290283648e-001;
+				float p1 = -8.6523355025079577e-003;
+				float p2 = 1.3118055542282476e-002;
+				float k3 = 1.5561334862418680e-001;
 				initializeIntrinsics(focalLengthX, focalLengthY, centerX, centerY, k1, k2, k3, p1, p2);
 			}
 			SafeRelease(pDepthFrameDescription);

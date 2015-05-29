@@ -1,5 +1,8 @@
 #pragma once
 
+
+#ifndef KINECT_ONE
+
 /************************************************************************/
 /* Kinect Sensor (the old version of a Kinect)                          */
 /************************************************************************/
@@ -59,3 +62,5 @@ private:
 	bool			m_kinect4Windows;
 	bool			m_bNearMode;
 };
+
+#endif

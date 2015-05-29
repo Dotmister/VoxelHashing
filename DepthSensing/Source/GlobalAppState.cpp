@@ -198,8 +198,12 @@ DepthSensor* GlobalAppState::getDepthSensor()
 {
 	if(GlobalAppState::getInstance().s_sensorIdx == 0)
 	{
+#ifndef KINECT_ONE
 		static KinectSensor s_kinect;
 		return &s_kinect;
+#else
+		throw MLIB_EXCEPTION("Requires Kinect 1.x SDK and disable KINECT_ONE macro");
+#endif
 	}
 	else if(GlobalAppState::getInstance().s_sensorIdx == 1)
 	{
@@ -210,8 +214,6 @@ DepthSensor* GlobalAppState::getDepthSensor()
 		throw MLIB_EXCEPTION("Requires OpenNI 2 SDK and enable OPEN_NI macro");
 #endif
 	}
-	
-
 	else if (GlobalAppState::getInstance().s_sensorIdx == 4) 
 	{
 		static ImageReaderSensor s_imageReader;
